@@ -43,25 +43,25 @@ def humanDetector(args):
     else : camera = False
 
     writer = None
-    #if args['output'] is not None and image_path is None:
-       # writer = cv2.VideoWriter(args['output'],cv2.VideoWriter_fourcc(*'MJPG'), 10, (600,600))
+    if args['output'] is not None and image_path is None:
+       writer = cv2.VideoWriter(args['output'],cv2.VideoWriter_fourcc(*'MJPG'), 10, (600,600))
 
     if camera:
         print('[INFO] Opening Web Cam.')
         detectByCamera(ouput_path,writer)
-    #elif video_path is not None:
-       # print('[INFO] Opening Video from path.')
-       # detectByPathVideo(video_path, writer)
-    #elif image_path is not None:
-       # print('[INFO] Opening Image from path.')
-       # detectByPathImage(image_path, args['output'])
+    elif video_path is not None:
+       print('[INFO] Opening Video from path.')
+       detectByPathVideo(video_path, writer)
+    elif image_path is not None:
+       print('[INFO] Opening Image from path.')
+       detectByPathImage(image_path, args['output'])
 
 def argsParser():
     arg_parse = argparse.ArgumentParser()
-    #arg_parse.add_argument("-v", "--video", default=None, help="path to Video File ")
-   # arg_parse.add_argument("-i", "--image", default=None, help="path to Image File ")
+    arg_parse.add_argument("-v", "--video", default=None, help="path to Video File ")
+    arg_parse.add_argument("-i", "--image", default=None, help="path to Image File ")
     arg_parse.add_argument("-c", "--camera", default=True, help="")
-   # arg_parse.add_argument("-o", "--output", type=str, help="path to optional output video file")
+    arg_parse.add_argument("-o", "--output", type=str, help="path to optional output video file")
     args = vars(arg_parse.parse_args())
 
     return args
